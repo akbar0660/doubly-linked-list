@@ -10,7 +10,7 @@ public class MyLinkedList<T> implements List<T> {
     private Node<T> last;
     private int size;
 
-    class Node<T> {
+    static class Node<T> {
         T value;
         Node<T> next; // reference
         Node<T> prev; //reference
@@ -77,7 +77,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public boolean isEmpty() {
-        return this.first==null ? true:false;
+        return this.first==null;
     }
 
     @Override
@@ -250,7 +250,7 @@ public class MyLinkedList<T> implements List<T> {
             n = n.next;
             count++;
         }
-        return count == size ? false : true;
+        return count !=size;
     }
 
     void printAll() {
