@@ -1,6 +1,11 @@
 package org.example.DoublyLinkedList;
 
-public class MyLinkedList<T> {
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class MyLinkedList<T> implements List<T> {
     private Node<T> first;
     private Node<T> last;
     private int size;
@@ -23,25 +28,6 @@ public class MyLinkedList<T> {
             n = n.next;
             count++;
         }
-        return n;
-    }
-
-    private Node<T> removeLast() {
-        Node<T> n = last.prev;
-        Node<T> n1 = last;
-        n.next = null;
-        last = n;
-        n1.prev = null;
-        return last;
-    }
-
-    private Node<T> removeFirst() {
-        Node<T> n = first.next;
-        Node<T> n1 = first;
-        first = n;
-        first.prev = null;
-        first.next = n.next;
-        n1.next = null;
         return n;
     }
 
@@ -84,11 +70,78 @@ public class MyLinkedList<T> {
         size++;
     }
 
-    int getSize() {
+    @Override
+    public int size() {
         return size;
     }
 
-    T get(int index) {
+    @Override
+    public boolean isEmpty() {
+        return this.first==null ? true:false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        Object[] array = new Object[size];
+        Node<T> n = first;
+        for(int i = 0 ;i<size;i++){
+            array[i] = n.value;
+            n = n.next;
+        }
+        return array;
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean add(T t) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    public T get(int index) {
         Node<T> n = first;
         int count = 0;
         while (count != index) {
@@ -98,20 +151,32 @@ public class MyLinkedList<T> {
         return n.value;
     }
 
-    T getFirst() {
+    @Override
+    public T set(int index, T element) {
+        return null;
+    }
+
+    @Override
+    public void add(int index, T element) {
+
+    }
+
+    public T getFirst() {
         return first.value;
     }
 
-    T getLast() {
+    public T getLast() {
         return last.value;
     }
 
-    T remove(int index) {
+    public T remove(int index) {
         if (first == null) {
             return null;
         } else if (index == size - 1) {
             size--;
-            return removeLast().value;
+            Node<T> n = getNode(size-1);
+            removeLast();
+            return n.value;
         } else {
             Node<T> n = getNode(index);
             Node<T> previous = n.prev;
@@ -121,6 +186,21 @@ public class MyLinkedList<T> {
             size--;
             return n.value;
         }
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return null;
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        return null;
     }
 
     boolean removeByValue(T element) {
@@ -148,7 +228,7 @@ public class MyLinkedList<T> {
         }
     }
 
-    int indexOf(T element) {
+    public int indexOf(Object element) {
         int index = 0;
         Node<T> n = first;
         while (n.value != element) {
@@ -158,7 +238,12 @@ public class MyLinkedList<T> {
         return index;
     }
 
-    boolean contains(T element) {
+    @Override
+    public int lastIndexOf(Object o) {
+        return 0;
+    }
+
+    public boolean contains(Object element) {
         Node<T> n = first;
         int count = 0;
         while (n != null && n.value != element) {

@@ -1,6 +1,5 @@
 package org.example.DoublyLinkedList;
 
-import org.example.DoublyLinkedList.MyLinkedList;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +16,7 @@ public class Main {
         list.remove(2);
         list.addHead("dsjkj");
         list.printAll();
-        System.out.println(list.getSize());
+        System.out.println(list.size());
         System.out.println(list.getFirst());
         System.out.println(list.getLast());
         System.out.println(list.contains("sjjasf"));
